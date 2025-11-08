@@ -1,6 +1,6 @@
 //1. Festival ribbon count
 
-const countOf = function (count, string) {
+const countBlue = function (count, string) {
   return string === "blue" ? count + 1 : count;
 }
 //2. Stargazing log
@@ -13,6 +13,12 @@ const isNotDuplicate = function (element, index, list) {
   }
 
   return false;
+}
+
+//5. candy jar stocking
+
+const countOf = function (count, number) {
+  return count + number;
 }
 
 function isEqual(array1, array2) {
@@ -52,8 +58,8 @@ function testOperations(actual, expected, gist) {
 function testsOfRibbonCount() {
   console.log("\n--- RIBBON COUNT ---\n");
 
-  testOperations(["red", "blue", "red", "green", "red", "blue"].reduce(countOf, 0), 2, "an array");
-  testOperations(["red", "red", "green", "red"].reduce(countOf, 0), 0, "an array");
+  testOperations(["red", "blue", "red", "green", "red", "blue"].reduce(countBlue, 0), 2, "an array");
+  testOperations(["red", "red", "green", "red"].reduce(countBlue, 0), 0, "an array");
 }
 
 function testsStargazingLog() {
@@ -73,6 +79,7 @@ function testsOfRemoveDuplicate() {
   );
 
 }
+
 function testsOfAttendenceCheck() {
   console.log("\n--- ATTENDENCE CHECK ---\n");
 
@@ -83,11 +90,22 @@ function testsOfAttendenceCheck() {
 
 }
 
+function testsOfCandyCount() {
+  console.log("\n--- CANDY COUNT ---\n");
+
+  testOperations(
+    [[5, 3], [1, 3, 2], [3, 2]].flat().reduce(countOf),
+    19, "listof candies added"
+  );
+
+}
+
 function testAll() {
   testsOfRibbonCount();
   testsOfRemoveDuplicate();
   testsStargazingLog();
   testsOfAttendenceCheck();
+  testsOfCandyCount();
 }
 
 testAll();
