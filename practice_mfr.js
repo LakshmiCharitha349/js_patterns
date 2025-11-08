@@ -2,16 +2,12 @@ console.log("--- Usage of Map Filter Reduce Fns --- ");
 
 //1. Festival ribbon count
 
-const countOf = (count, string) => string === "blue" ? count + 1 : count;
+const countOf = function (count, string) {
+  return string === "blue" ? count + 1 : count;
+}
 
-const reduce = (reducer, data) => {
-  let reducedElement = 0;
-  for (let index = 0; index < data.length; index++) {
-    reducedElement = reducer(reducedElement, data[index]);
-  }
+const reduceData = (reducer, data, intialValue = 0) => data.reduce(reducer, intialValue);
 
-  return reducedElement;
-};
 
 function isEqual(array1, array2) {
   if (!Array.isArray(array1)) {
@@ -52,7 +48,7 @@ function testOperations(type, operation, data, expected, gist) {
 
 function tests() {
 
-  testOperations(reduce, countOf, ["red", "blue", "red", "green", "red", "blue"], 2, "an array");
+  testOperations(reduceData, countOf, ["red", "blue", "red", "green", "red", "blue"], 2, "an array");
 }
 
 tests();
