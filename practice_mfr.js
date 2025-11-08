@@ -38,6 +38,13 @@ const isUnique = (color,index,list) => {
   return false;
 };
 
+//10 count dune
+
+const countDune = function (count, string) {
+  return string === "dune" ? count + 1 : count;
+}
+
+
 function isEqual(array1, array2) {
   if (!Array.isArray(array1)) {
     return array1 === array2;
@@ -176,6 +183,21 @@ function testsOfColor() {
 
 }
 
+function testsOfCountDune() {
+  console.log("\n--- REMOVE DUPLICATE ---\n");
+
+  testOperations(
+    ["dune","foundation","dune"].reduce(countDune,0),
+    2, "list of books"
+  );
+  
+  testOperations(
+    ["story","foundation","fairy tales"].reduce(countDune,0),
+    0, "list of books"
+  );
+}
+
+
 function testAll() {
   testsOfRibbonCount();
   testsOfRemoveDuplicate();
@@ -186,6 +208,7 @@ function testAll() {
   testsOfWeather();
   testsOfFitnessTracker();
   testsOfColor();
+  testsOfCountDune();
 }
 
 testAll();
