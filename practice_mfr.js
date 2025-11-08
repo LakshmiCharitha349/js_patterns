@@ -25,6 +25,10 @@ const countOf = function (count, number) {
 
 const isMusicDo = (note) => note === "do";
 
+//7. Weather validation
+
+const isBelow32 = (weather) => weather < 32;
+
 function isEqual(array1, array2) {
   if (!Array.isArray(array1)) {
     return array1 === array2;
@@ -103,12 +107,33 @@ function testsOfCandyCount() {
   );
 
 }
+
 function testsOfMusicNotes() {
   console.log("\n--- MUSIC NOTES ---\n");
 
   testOperations(
     [["mi", "fa", "so"], ["do", "mi"], ["fa"]].flat().some(isMusicDo),
     true, "listof music notes"
+  );
+
+  testOperations(
+    [["mi", "fa", "so"], ["fa", "mi"], ["fa"]].flat().some(isMusicDo),
+    false, "listof music notes"
+  );
+
+}
+
+function testsOfWeather() {
+  console.log("\n--- WEATHER VALIDATIONx ---\n");
+
+  testOperations(
+    [[22, 23],[25, 24, 22],[29]].flat().every(isBelow32),
+    true, "listof temperaues"
+  );
+
+  testOperations(
+    [[22, 35],[25, 24, 22],[29]].flat().every(isBelow32),
+    false, "listof temperaues > 32"
   );
 
 }
@@ -120,6 +145,7 @@ function testAll() {
   testsOfAttendenceCheck();
   testsOfCandyCount();
   testsOfMusicNotes();
+  testsOfWeather();
 }
 
 testAll();
