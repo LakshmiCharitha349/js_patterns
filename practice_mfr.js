@@ -29,6 +29,15 @@ const isMusicDo = (note) => note === "do";
 
 const isBelow32 = (weather) => weather < 32;
 
+//9. Art workshop color variety
+
+const isUnique = (color,index,list) => { 
+  if(list.indexOf(color) === list.lastIndexOf(color)) {  
+    return true;
+  }
+  return false;
+};
+
 function isEqual(array1, array2) {
   if (!Array.isArray(array1)) {
     return array1 === array2;
@@ -152,6 +161,21 @@ function testsOfWeather() {
 
 }
 
+function testsOfColor() {
+  console.log("\n--- WEATHER VALIDATIONx ---\n");
+
+  testOperations(
+    [["blue", "yellow"],["yellow", "green"],["blue"]].flat().filter(isUnique),
+    ["green"], "list of paints"
+  );
+
+  testOperations(
+    [["blue","red"],["white","red"],["red"]].flat().filter(isUnique),
+    ["blue","white"], "list of paints"
+  );
+
+}
+
 function testAll() {
   testsOfRibbonCount();
   testsOfRemoveDuplicate();
@@ -161,6 +185,7 @@ function testAll() {
   testsOfMusicNotes();
   testsOfWeather();
   testsOfFitnessTracker();
+  testsOfColor();
 }
 
 testAll();
