@@ -21,6 +21,10 @@ const countOf = function (count, number) {
   return count + number;
 }
 
+//6. Music notes
+
+const isMusicDo = (note) => note === "do";
+
 function isEqual(array1, array2) {
   if (!Array.isArray(array1)) {
     return array1 === array2;
@@ -99,6 +103,15 @@ function testsOfCandyCount() {
   );
 
 }
+function testsOfMusicNotes() {
+  console.log("\n--- MUSIC NOTES ---\n");
+
+  testOperations(
+    [["mi", "fa", "so"], ["do", "mi"], ["fa"]].flat().some(isMusicDo),
+    true, "listof music notes"
+  );
+
+}
 
 function testAll() {
   testsOfRibbonCount();
@@ -106,6 +119,7 @@ function testAll() {
   testsStargazingLog();
   testsOfAttendenceCheck();
   testsOfCandyCount();
+  testsOfMusicNotes();
 }
 
 testAll();
