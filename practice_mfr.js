@@ -122,6 +122,20 @@ function testsOfMusicNotes() {
   );
 
 }
+function testsOfFitnessTracker() {
+  console.log("\n--- FITNESS TRACKER MILES ---\n");
+
+  testOperations(
+    [[2, 3, 2],[4],[1, 1]].flat().reduce(countOf),
+    13, "list of runner logs"
+  );
+
+  testOperations(
+    [[1,5,0]].flat().reduce(countOf),
+    6, "listof runner logs"
+  );
+
+}
 
 function testsOfWeather() {
   console.log("\n--- WEATHER VALIDATIONx ---\n");
@@ -146,6 +160,7 @@ function testAll() {
   testsOfCandyCount();
   testsOfMusicNotes();
   testsOfWeather();
+  testsOfFitnessTracker();
 }
 
 testAll();
