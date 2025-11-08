@@ -3,20 +3,18 @@
 const countOf = function (count, string) {
   return string === "blue" ? count + 1 : count;
 }
-
+//2. Stargazing log
 //3. birdwatchimg duplicate removal
+//4.Attendence check
 
-const isNotDuplicate = function (bird,index,list) {
-    if(list.indexOf(bird) === index) {
-      return true;
-    }
-    
+const isNotDuplicate = function (element, index, list) {
+  if (list.indexOf(element) === index) {
+    return true;
+  }
+
   return false;
-} 
+}
 
-// const data = [["Orion", "Leo"],
-// ["Taurus"],
-// ["Orion", "Gemini"]]
 function isEqual(array1, array2) {
   if (!Array.isArray(array1)) {
     return array1 === array2;
@@ -40,34 +38,56 @@ function displayMessage(result, expected, gist) {
     //const inputFrag = `\ninput: ${data}\n`;
     const actualFragment = `Result: ${result}\n`;
     const expectedFragment = `Expected: ${expected}`;
-    message += inputFrag + actualFragment + expectedFragment;
+    message += actualFragment + expectedFragment;
   }
 
   console.log(message);
 }
 
-function testOperations( actual, expected, gist) {
-  displayMessage( actual, expected, gist);
+function testOperations(actual, expected, gist) {
+  displayMessage(actual, expected, gist);
 }
 
 
 function testsOfRibbonCount() {
   console.log("\n--- RIBBON COUNT ---\n");
 
-  testOperations(["red", "blue", "red", "green", "red", "blue"].reduce(countOf,0),2, "an array");
-  testOperations(["red","red", "green", "red"].reduce(countOf,0),0, "an array");
+  testOperations(["red", "blue", "red", "green", "red", "blue"].reduce(countOf, 0), 2, "an array");
+  testOperations(["red", "red", "green", "red"].reduce(countOf, 0), 0, "an array");
 }
+
+function testsStargazingLog() {
+  console.log("\n--- REMOVE DUPLICATE ---\n");
+
+  testOperations([["Orion", "Leo"], ["Taurus"], ["Orion", "Gemini"]].flat().filter(isNotDuplicate),
+    ["Orion", "Leo", "Taurus", "Gemini"], "list of names")
+}
+
 
 function testsOfRemoveDuplicate() {
   console.log("\n--- REMOVE DUPLICATE ---\n");
 
-  testOperations(["sparrow","crow","parrot","crow"].filter(isNotDuplicate),
-  ["sparrow","crow","parrot"],"list of birds")
+  testOperations(
+    ["sparrow", "crow", "parrot", "crow"].filter(isNotDuplicate),
+    ["sparrow", "crow", "parrot"], "list of birds"
+  );
+
+}
+function testsOfAttendenceCheck() {
+  console.log("\n--- ATTENDENCE CHECK ---\n");
+
+  testOperations(
+    [["nani", "neel", "ravi", "asha"], ["neel", "meera"], ["neel"]].flat().filter(isNotDuplicate),
+    ["nani", "neel", "ravi", "asha", "meera"], "list of students"
+  );
+
 }
 
 function testAll() {
   testsOfRibbonCount();
   testsOfRemoveDuplicate();
+  testsStargazingLog();
+  testsOfAttendenceCheck();
 }
 
 testAll();
