@@ -8,7 +8,7 @@ const hollowLine = size => {
   return `*${filled(" ", size - 2)}*`;
 };
 
-const repeatSize = (size) => {
+const repeatSize = function (size) {
   const result = [];
   for (let row = 1; row <= size; row++) {
     result.push(row);
@@ -17,7 +17,9 @@ const repeatSize = (size) => {
   return result;
 }
 
-const repeatRC = (rs, cs) => {
+const repeatRC = function (rs, cs) {
+  if (cs === 0) return [];
+
   const result = [];
   for (let row = 1; row <= rs; row++) {
     result.push(cs);
@@ -26,19 +28,7 @@ const repeatRC = (rs, cs) => {
   return result;
 }
 
-const repeatSizeOfHollow = (rs, cs) => {
-  if (rs === 0 || cs === 0) {
-    return [];
-  }
-
-  if (rs === 1) {
-    return [cs];
-  }
-
-  return [cs, repeatRC(rs - 2, cs), cs];
-}
-
-const hollowTriangle = (size) => {
+const hollowTriangle = function (size) {
   const result = [];
 
   result.push(size.slice(0, -1).map(x => hollowLine(x)));
@@ -47,7 +37,7 @@ const hollowTriangle = (size) => {
   return result.flat();
 }
 
-const triangle = (size) => {
+const triangle = function (size)  {
   return size.map(x => filled("*", x));
 }
 
@@ -56,28 +46,25 @@ const chooseChar = (index, size) => {
   return chars[index % size];
 }
 
-const alternatingRectangle = (size) => {
+const alternatingRectangle = function (size) {
   return size.map((x, index) => filled(chooseChar(index, 2), x));
 }
 
-const spacedAlternatingRectangle = (size) => {
+const spacedAlternatingRectangle = function (size) {
   return size.map((x, index) => filled(chooseChar(index, 3), x));
 }
 
-const hollowRectangle = size => {
-  if (size.length <= 1) {
-    return [filled("*", size[0])];
-  }
-
+const hollowRectangle = function (size) {
   const pattern = [];
+
   pattern.push(filled("*", size[0]));
-  pattern.push(size[1].map(x => hollowLine(x)));
-  pattern.push(filled("*", size[2]));
+  pattern.push(size.slice(1, -1).map(x => hollowLine(x)));
+  pattern.push(filled("*", size[size.length - 1]));
 
   return pattern.flat();
 }
 
-const filledRectangle = size => {
+const filledRectangle = function (size) {
   return size.map(x => filled("*", x));
 }
 
@@ -96,12 +83,12 @@ function testCasesOfFilledRect() {
 function testCasesOfHollowRect() {
   console.log("\n--- HOLLOW RECT ---\n");
 
-  console.log(applyStyles(hollowRectangle, repeatSizeOfHollow(0, 4)), "\n");
-  console.log(applyStyles(hollowRectangle, repeatSizeOfHollow(4, 0)), "\n");
-  console.log(applyStyles(hollowRectangle, repeatSizeOfHollow(4, 4)), "\n");
-  console.log(applyStyles(hollowRectangle, repeatSizeOfHollow(1, 1)), "\n");
-  console.log(applyStyles(hollowRectangle, repeatSizeOfHollow(2, 2)), "\n");
-  console.log(applyStyles(hollowRectangle, repeatSizeOfHollow(10, 10)), "\n");
+  console.log(applyStyles(hollowRectangle, repeatRC(0, 4)), "\n");
+  console.log(applyStyles(hollowRectangle, repeatRC(4, 0)), "\n");
+  console.log(applyStyles(hollowRectangle, repeatRC(4, 4)), "\n");
+  console.log(applyStyles(hollowRectangle, repeatRC(1, 1)), "\n");
+  console.log(applyStyles(hollowRectangle, repeatRC(2, 2)), "\n");
+  console.log(applyStyles(hollowRectangle, repeatRC(10, 10)), "\n");
 }
 function testCasesOfAlternatingRect() {
   console.log("\n--- ALTERNATING RECT ---\n");
