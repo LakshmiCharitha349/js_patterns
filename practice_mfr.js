@@ -100,7 +100,7 @@ function testsOfCount() {
 
    testOperations(reduce(count,[[2, 3, 2],[4],[1, 1]],0),13, "list of runner logs");
 
-  testOperations(reduce(count,[[1,5,0]],0), 6, "listof runner logs" );
+   testOperations(reduce(count,[[1,5,0]],0), 6, "listof runner logs" );
    testOperations(countOf(["dune","foundation","dune"],"dune",0),2, "list of books");
   
   testOperations(countOf(["story","foundation","fairy tales"],"dune",0),0, "list of books");
