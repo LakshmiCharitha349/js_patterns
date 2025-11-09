@@ -1,7 +1,11 @@
 
 const reduce = (predicator,data,intialValue) => {
   return data.flatMap(x => x).reduce(predicator,intialValue);
-}
+};
+
+const countOf = (data,word,count) => {
+  return data.flatMap(x => x).reduce((count,x) => (x === word) ? count + 1 : count,0);
+};
 
 const filter = (predicator,data) =>{
   return data.flatMap(x => x).filter(predicator);
@@ -14,14 +18,6 @@ const some = (data,word) =>{
 const every = (predicator,data) => {
   return data.flatMap(x => x).every(predicator);
 }
-//1. Festival ribbon count
-
-const countBlue = function (count, string) {
-  return string === "blue" ? count + 1 : count;
-}
-//2. Stargazing log
-//3. birdwatchimg duplicate removal
-//4.Attendence check
 
 const isNotDuplicate = function (element, index, list) {
   if (list.indexOf(element) === index) {
@@ -31,21 +27,12 @@ const isNotDuplicate = function (element, index, list) {
   return false;
 }
 
-//5. candy jar stocking
 
-const countOf = function (count, number) {
+const count = function (count, number) {
   return count + number;
 }
 
-//6. Music notes
-
-const isMusicDo = (currentNote,note) => currentNote === note;
-
-//7. Weather validation
-
 const isBelow32 = (weather) => weather < 32;
-
-//9. Art workshop color variety
 
 const isUnique = (color,index,list) => { 
   if(list.indexOf(color) === list.lastIndexOf(color)) {  
@@ -53,16 +40,6 @@ const isUnique = (color,index,list) => {
   }
   return false;
 };
-
-//10 count dune
-
-const countDune = function (count, string) {
-  return string === "dune" ? count + 1 : count;
-}
-
-
-
-
 
 function isEqual(array1, array2) {
   if (!Array.isArray(array1)) {
@@ -101,8 +78,8 @@ function testOperations(result, expected, gist) {
 function testsOfRibbonCount() {
   console.log("\n--- RIBBON COUNT ---\n");
 
-  testOperations(reduce(countBlue,["red", "blue", "red", "green", "red", "blue"],0),2, "an array");
-  testOperations(reduce(countBlue,["red", "red", "green", "red"], 0),0, "an array");
+  testOperations(countOf(["red", "blue", "red", "green", "red", "blue"],"blue",0),2, "an array");
+  testOperations(countOf(["red", "red", "green", "red"],"blue", 0),0, "an array");
 }
 
 function testsStargazingLog() {
@@ -134,7 +111,7 @@ function testsOfAttendenceCheck() {
 function testsOfCandyCount() {
   console.log("\n--- CANDY COUNT ---\n");
 
-  testOperations(reduce(countOf,[[5, 3], [1, 3, 2], [3, 2]],0,),19, "listof candies added");
+  testOperations(reduce(count,[[5, 3], [1, 3, 2], [3, 2]],0,),19, "listof candies added");
 
 }
 
@@ -151,9 +128,9 @@ function testsOfMusicNotes() {
 function testsOfFitnessTracker() {
   console.log("\n--- FITNESS TRACKER MILES ---\n");
 
-  testOperations(reduce(countOf,[[2, 3, 2],[4],[1, 1]],0),13, "list of runner logs");
+  testOperations(reduce(count,[[2, 3, 2],[4],[1, 1]],0),13, "list of runner logs");
 
-  testOperations(reduce(countOf,[[1,5,0]],0), 6, "listof runner logs" );
+  testOperations(reduce(count,[[1,5,0]],0), 6, "listof runner logs" );
 
 }
 
@@ -186,9 +163,9 @@ function testsOfColor() {
 function testsOfCountDune() {
   console.log("\n--- COUNT DUNE---\n");
 
-  testOperations(reduce(countDune,["dune","foundation","dune"],0),2, "list of books");
+  testOperations(countOf(["dune","foundation","dune"],"dune",0),2, "list of books");
   
-  testOperations(reduce(countDune,["story","foundation","fairy tales"],0),0, "list of books");
+  testOperations(countOf(["story","foundation","fairy tales"],"dune",0),0, "list of books");
 }
 
 function testsOfLunchBox() {
@@ -210,7 +187,7 @@ function testsOfMusicNotesOfSo() {
 function testsOfCrateTotals() {
   console.log("\n--- CRATE TOTALS ---\n");
 
-  testOperations(reduce(countOf,[[4,6], [1, 3, 2], [5]],0,),21, "listof weigths");
+  testOperations(reduce(count,[[4,6], [1, 3, 2], [5]],0,),21, "listof weigths");
 
 }
 
@@ -220,6 +197,20 @@ function testsOfPostalRecords() {
   testOperations(filter(isUnique,["small","big","small","medium"]),
     ["big","medium"], "list of records"
   );
+}
+
+function testsOfWildLifeCount() {
+  console.log("\n--- COUNT DEERS---\n");
+
+  testOperations(countOf(["deer", "deer", "lion", "rabbit", "deer"],"deer",0),3, "an array");
+  testOperations(countOf(["rabbit", "lion", "tiger", "lion"],"deer", 0),0, "an array");
+}
+
+function testsStudyGroup() {
+  console.log("\n--- STUDY GROUP---\n");
+
+  testOperations(filter(isNotDuplicate,[[1,2,3], [3], [3,4,1]]),
+    [1,2,3,4], "list of chapters");
 }
 
 
@@ -239,6 +230,8 @@ function testAll() {
   testsOfMusicNotesOfSo();
   testsOfCrateTotals();
   testsOfPostalRecords();
+  testsOfWildLifeCount();
+  testsStudyGroup();
 }
 
 testAll();
