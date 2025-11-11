@@ -1,6 +1,6 @@
 const data = [23, 24, 23, 24, 25];
 
-const calculateFrequency = (result, number) => { // frequence
+const calculateFrequency = (result, number) => { // frequencey
   if (!(number in result)) {
     result[number] = 0;
   }
@@ -10,4 +10,4 @@ const calculateFrequency = (result, number) => { // frequence
 };
 
 const frequency = data.reduce(calculateFrequency, {});
-console.log(frequency);
+console.table(frequency);
